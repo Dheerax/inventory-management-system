@@ -19,6 +19,21 @@ Validation: product IDs must be unique, and price and quantity can't be negative
 
 ## Frontend
 
+```
+frontend/src/
+├── App.jsx
+├── api.js
+├── main.jsx
+├── index.css
+├── components/
+│   └── ProductTable.jsx
+└── pages/
+    ├── ProductList.jsx
+    ├── AddProduct.jsx
+    ├── EditProduct.jsx
+    └── LowStock.jsx
+```
+
 ### App.jsx
 
 App.jsx is the main component of the app. It holds the navigation bar and all the routes, so it decides which page shows up for each URL. The pages call the backend through Axios, and all those calls are kept together in api.js.
@@ -31,6 +46,20 @@ App.jsx is the main component of the app. It holds the navigation bar and all th
 | /low-stock | LowStock | GET /api/products/low-stock |
 
 ## Backend
+
+```
+backend/src/main/java/com/shop/inventory/
+├── InventoryApplication.java
+├── controller/ProductController.java
+├── model/Product.java
+├── model/ProductUpdate.java
+├── repository/ProductRepository.java
+├── service/ProductService.java
+└── exception/
+    ├── GlobalExceptionHandler.java
+    ├── ProductNotFoundException.java
+    └── DuplicateProductException.java
+```
 
 REST endpoints (base path /api/products):
 
