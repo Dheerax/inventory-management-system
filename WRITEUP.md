@@ -146,3 +146,12 @@ it shows "Cannot reach server".
   edited price and quantity, searched, deleted, checked the low-stock highlight, and tried
   invalid input and duplicate IDs.
 - **API checks:** tested each endpoint with curl/Postman.
+
+---
+
+## 6. DEPLOYMENT
+
+- Frontend: Vercel → https://inventory-tt.vercel.app
+- Backend: Render (Docker) → https://inventory-api-59ts.onrender.com/api/products
+- Database: Supabase PostgreSQL
+- Code: https://github.com/Dheerax/inventory-management-system

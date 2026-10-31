@@ -6,6 +6,13 @@ A small app for a shop owner to keep track of products, prices and stock, and to
 - **Backend:** Java 21, Spring Boot 3 REST API (Spring Web, Spring Data JPA, Bean Validation)
 - **Database:** PostgreSQL hosted on **Supabase**
 
+## Live demo
+
+- App: https://inventory-tt.vercel.app
+- API: https://inventory-api-59ts.onrender.com/api/products
+
+The backend is on Render's free plan, so the first request after it has been idle can take about a minute.
+
 ## Features
 
 1. Add a product (product ID, name, price, quantity)
@@ -97,3 +104,9 @@ mvn test
 10 tests cover add, list, update, search, low stock, delete, duplicate IDs, negative values and 404s.
 
 The app was also tested end to end: React UI → Spring Boot → Supabase (add, edit, search, delete, low-stock highlight and error messages).
+
+## Deployment
+
+- **Backend → Render:** web service built from `backend/Dockerfile` with root directory `backend`. Set the env vars `DB_URL`, `DB_USER` and `DB_PASSWORD`.
+- **Frontend → Vercel:** root directory `frontend` (Vite preset). Set the env var `VITE_API_URL=https://<render-url>/api`. `vercel.json` sends every route to `index.html` so links like `/low-stock` work.
+- **Database:** Supabase (already in the cloud).
