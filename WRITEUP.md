@@ -85,3 +85,27 @@ Product is mapped to the products table. It has four fields:
 Used PostgreSQL hosted on Supabase. Spring Data JPA connects to it, and the products table gets created automatically when the backend starts.
 
 The project is also deployed. The frontend is on Vercel (inventory-tt.vercel.app) and the backend is on Render.
+
+## How to Run
+
+Backend (runs on port 8080). The Supabase connection details go in backend/.env first.
+
+```
+cd backend
+mvn spring-boot:run
+```
+
+Frontend (runs on port 5173):
+
+```
+cd frontend
+npm install
+npm run dev
+```
+
+Run the backend tests:
+
+```
+cd backend
+mvn test
+```
