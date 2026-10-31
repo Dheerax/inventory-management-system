@@ -2,8 +2,16 @@
 
 This app helps a small shop owner keep track of products, prices and stock, and shows which items need restocking. The frontend is built with React, the backend is a REST API in Java Spring Boot, and the database is Supabase (PostgreSQL).
 
+## System Architecture
+
 ```
-React (Frontend) ──Axios──▶ Spring Boot REST API ──JPA──▶ Supabase PostgreSQL
+ ┌──────────────┐   HTTP / JSON   ┌───────────────────────┐    JPA    ┌──────────────┐
+ │    React     │ ──────────────▶ │  Spring Boot REST API │ ────────▶ │   Supabase   │
+ │  (Frontend)  │     (Axios)     │       (Backend)       │   (SQL)   │  PostgreSQL  │
+ │              │ ◀────────────── │                       │ ◀──────── │              │
+ └──────────────┘                 └───────────────────────┘           └──────────────┘
+                                   Controller → Service →
+                                   Repository
 ```
 
 ## Features Implemented
