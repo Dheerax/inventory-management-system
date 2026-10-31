@@ -5,22 +5,13 @@ This app helps a small shop owner keep track of products, prices and stock, and 
 ## System Architecture
 
 ```
-┌─────────────────────┐                   ┌─────────────────────────┐                  ┌──────────────────┐
-│   FRONTEND (React)  │                   │ BACKEND (Spring Boot)   │                  │ DATABASE         │
-│                     │  HTTP request     │                         │   JPA / SQL      │ Supabase         │
-│  App.jsx (routes)   │ ────────────────▶ │  ProductController      │ ───────────────▶ │ PostgreSQL       │
-│   ├ ProductList     │  GET  POST        │   (REST endpoints)      │                  │                  │
-│   ├ AddProduct      │  PUT  DELETE      │          │              │                  │  products table  │
-│   ├ EditProduct     │   /api/products   │          ▼              │                  │  ─────────────   │
-│   └ LowStock        │                   │  ProductService         │                  │  product_id (PK) │
-│                     │  JSON response    │   (validation, logic)   │   result         │  name            │
-│  api.js (Axios)     │ ◀──────────────── │          │              │ ◀─────────────── │  price           │
-│                     │                   │          ▼              │                  │  quantity        │
-│                     │                   │  ProductRepository      │                  │                  │
-│                     │                   │   (JpaRepository)       │                  │                  │
-└─────────────────────┘                   └─────────────────────────┘                  └──────────────────┘
-
-Errors: GlobalExceptionHandler returns 400 (invalid), 404 (not found), 409 (duplicate ID) as JSON.
+ ┌──────────────┐   HTTP / JSON   ┌───────────────────────┐    JPA    ┌──────────────┐
+ │    React     │ ──────────────▶ │  Spring Boot REST API │ ────────▶ │   Supabase   │
+ │  (Frontend)  │     (Axios)     │       (Backend)       │   (SQL)   │  PostgreSQL  │
+ │              │ ◀────────────── │                       │ ◀──────── │              │
+ └──────────────┘                 └───────────────────────┘           └──────────────┘
+                                   Controller → Service →
+                                   Repository
 ```
 
 ## Features Implemented
