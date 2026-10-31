@@ -1,12 +1,12 @@
 # Inventory Management System
 
-React.js + Spring Boot REST API + Supabase (PostgreSQL)
+This app helps a small shop owner keep track of products, prices and stock, and shows which items need restocking. I built the frontend in React, the backend as a REST API in Java Spring Boot, and I used Supabase (PostgreSQL) as the database.
 
 ```
 React (Frontend) ──Axios──▶ Spring Boot REST API ──JPA──▶ Supabase PostgreSQL
 ```
 
-## FRONTEND
+## Frontend
 
 ```
 frontend/src/
@@ -25,19 +25,18 @@ frontend/src/
 
 ### App.jsx
 
-The main component. It sets up the routes and the nav bar, and shows the right page for each URL.
-Pages call the backend with Axios (in `api.js`).
+App.jsx is the main component of the app. It holds the navigation bar and all the routes, so it decides which page shows up for each URL. The pages call the backend through Axios, and I kept all those calls together in api.js.
 
-| URL | Page | Endpoint used |
+| URL | Page | Backend endpoint |
 |---|---|---|
-| `/` | ProductList | `GET /api/products`, `GET /api/products/search?q=`, `DELETE /api/products/{id}` |
-| `/add` | AddProduct | `POST /api/products` |
-| `/edit/:id` | EditProduct | `GET /api/products/{id}`, `PUT /api/products/{id}` |
-| `/low-stock` | LowStock | `GET /api/products/low-stock` |
+| / | ProductList | GET /api/products, GET /api/products/search?q=, DELETE /api/products/{id} |
+| /add | AddProduct | POST /api/products |
+| /edit/:id | EditProduct | GET /api/products/{id}, PUT /api/products/{id} |
+| /low-stock | LowStock | GET /api/products/low-stock |
 
-Products with quantity below 5 are highlighted with a "LOW" tag.
+On the products page, any item with less than 5 in stock is highlighted and marked "LOW", so it's easy to see what needs restocking.
 
-## BACKEND
+## Backend
 
 ```
 backend/src/main/java/com/shop/inventory/
@@ -55,34 +54,34 @@ backend/src/main/java/com/shop/inventory/
 
 ### Controller class: ProductController
 
-`@RestController`, base path `/api/products`
+This is a REST controller mapped to /api/products. It has these endpoints:
 
-- `GET /` gets all products
-- `GET /{id}` gets one product
-- `GET /search?q=` searches by name or ID
-- `GET /low-stock` gets products with qty < 5
-- `POST /` adds a product
-- `PUT /{id}` updates price or quantity
-- `DELETE /{id}` deletes a product
+- GET /api/products returns all products
+- GET /api/products/{id} returns one product
+- GET /api/products/search?q= searches by name or product ID
+- GET /api/products/low-stock returns products with quantity below 5
+- POST /api/products adds a new product
+- PUT /api/products/{id} updates the price or quantity
+- DELETE /api/products/{id} deletes a product
 
 ### Entity class: Product
 
-`@Entity`, table `products`
+Product is mapped to the products table. It has four fields:
 
-- `productId` (String, `@Id`, so it is unique)
-- `name` (String, `@NotBlank`)
-- `price` (Double, `@DecimalMin(0)`, cannot be negative)
-- `quantity` (Integer, `@Min(0)`, cannot be negative)
+- productId: the primary key, so two products can't have the same ID
+- name: can't be empty
+- price: can't be negative
+- quantity: can't be negative
 
 ### Other classes
 
-- **ProductRepository:** extends JpaRepository for database operations
-- **ProductService:** business logic and the duplicate ID check
-- **GlobalExceptionHandler:** returns errors as 400, 404 or 409 with a message
-- **ProductUpdate:** request body for PUT (price, quantity)
+- ProductRepository extends JpaRepository and does the database work.
+- ProductService has the main logic, like checking for a duplicate ID before saving.
+- GlobalExceptionHandler sends back a proper error message: 400 for invalid input, 404 if the product isn't found, and 409 if the ID already exists.
+- ProductUpdate is the request body for PUT. It only has price and quantity.
 
-## DATABASE
+## Database
 
-Supabase PostgreSQL, connected using Spring Data JPA. The table is created automatically.
+I used PostgreSQL hosted on Supabase. Spring Data JPA connects to it, and the products table gets created automatically when the backend starts.
 
-Live: https://inventory-tt.vercel.app
+I also deployed the project. The frontend is on Vercel (inventory-tt.vercel.app) and the backend is on Render.
