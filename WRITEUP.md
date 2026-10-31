@@ -61,7 +61,9 @@ backend/src/main/java/com/shop/inventory/
     └── DuplicateProductException.java
 ```
 
-REST endpoints (base path /api/products):
+### Controller class: ProductController
+
+This is a REST controller mapped to /api/products. It has these endpoints:
 
 | Method | Endpoint | Description |
 |---|---|---|
@@ -74,6 +76,22 @@ REST endpoints (base path /api/products):
 | DELETE | /api/products/{id} | Delete a product |
 
 Error responses: 400 for invalid input (like a negative price), 404 if the product isn't found, and 409 if the product ID already exists.
+
+### Entity class: Product
+
+Product is mapped to the products table. It has four fields:
+
+- productId: the primary key, so two products can't have the same ID
+- name: can't be empty
+- price: can't be negative
+- quantity: can't be negative
+
+### Other classes
+
+- ProductRepository extends JpaRepository and does the database work.
+- ProductService has the main logic, like checking for a duplicate ID before saving.
+- GlobalExceptionHandler sends back a proper error message for invalid input, a missing product or a duplicate ID.
+- ProductUpdate is the request body for PUT. It only has price and quantity.
 
 ## Database
 
