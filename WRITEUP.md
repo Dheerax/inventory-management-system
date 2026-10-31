@@ -1,6 +1,6 @@
 # Inventory Management System
 
-This app helps a small shop owner keep track of products, prices and stock, and shows which items need restocking. I built the frontend in React, the backend as a REST API in Java Spring Boot, and I used Supabase (PostgreSQL) as the database.
+This app helps a small shop owner keep track of products, prices and stock, and shows which items need restocking. The frontend is built with React, the backend is a REST API in Java Spring Boot, and the database is Supabase (PostgreSQL).
 
 ```
 React (Frontend) ──Axios──▶ Spring Boot REST API ──JPA──▶ Supabase PostgreSQL
@@ -25,7 +25,7 @@ frontend/src/
 
 ### App.jsx
 
-App.jsx is the main component of the app. It holds the navigation bar and all the routes, so it decides which page shows up for each URL. The pages call the backend through Axios, and I kept all those calls together in api.js.
+App.jsx is the main component of the app. It holds the navigation bar and all the routes, so it decides which page shows up for each URL. The pages call the backend through Axios, and all those calls are kept together in api.js.
 
 | URL | Page | Backend endpoint |
 |---|---|---|
@@ -82,6 +82,6 @@ Product is mapped to the products table. It has four fields:
 
 ## Database
 
-I used PostgreSQL hosted on Supabase. Spring Data JPA connects to it, and the products table gets created automatically when the backend starts.
+Used PostgreSQL hosted on Supabase. Spring Data JPA connects to it, and the products table gets created automatically when the backend starts.
 
-I also deployed the project. The frontend is on Vercel (inventory-tt.vercel.app) and the backend is on Render.
+The project is also deployed. The frontend is on Vercel (inventory-tt.vercel.app) and the backend is on Render.
