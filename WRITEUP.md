@@ -2,6 +2,17 @@
 
 This app helps a small shop owner keep track of products, prices and stock, and shows which items need restocking. The frontend is built with React, the backend is a REST API in Java Spring Boot, and the database is Supabase (PostgreSQL).
 
+## Features Implemented
+
+1. Add a product with a product ID, name, price and quantity in stock.
+2. Display all products with their current quantities.
+3. Update a product's price or stock quantity.
+4. Search products by name or product ID.
+5. Low-stock warning: items with a quantity below 5 are highlighted and marked "LOW". There is also a separate Low stock page that lists only those items.
+6. Delete a product.
+
+Validation: product IDs must be unique, and price and quantity can't be negative. These are checked on the frontend and again on the backend. Errors such as a duplicate ID or a negative price show up as a message on the form.
+
 ```
 React (Frontend) ──Axios──▶ Spring Boot REST API ──JPA──▶ Supabase PostgreSQL
 ```
